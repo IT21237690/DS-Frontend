@@ -7,7 +7,7 @@ const AllCoursesPage = () => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/course/allCourses');
+                const response = await axios.get('http://localhost:5002/course/allCourses');
                 setCourses(response.data);
             } catch (error) {
                 console.error('Error fetching courses:', error);
@@ -27,7 +27,7 @@ const AllCoursesPage = () => {
                         <th>Code</th>
                         <th>Description</th>
                         <th>Credits</th>
-                        <th>Faculty</th>
+                        <th>Thumbnail</th> {/* New column for thumbnails */}
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +37,14 @@ const AllCoursesPage = () => {
                             <td>{course.code}</td>
                             <td>{course.description}</td>
                             <td>{course.credits}</td>
-                            <td>{course.faculty}</td>
+                            <td>
+                                {course.videos.length > 0 && (
+                                    <img src={course.videos[0].thumbnailUrl} alt={course.videos[0].title} style={{ width: '100px', height: 'auto' }} />
+                                )}
+                                {!course.videos.length && (
+                                    <p>No videos available</p>
+                                )}
+                            </td>
                         </tr>
                     ))}
                 </tbody>

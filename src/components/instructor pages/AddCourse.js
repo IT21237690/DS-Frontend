@@ -10,6 +10,7 @@ const AddCourse = () => {
     title: '',
     video: null
   });
+  const [showDoneMessage, setShowDoneMessage] = useState(false); // New state
 
   const handleChange = (e) => {
     setCourseData({ ...courseData, [e.target.name]: e.target.value });
@@ -37,6 +38,7 @@ const AddCourse = () => {
         }
       });
       console.log('Course added:', response.data);
+      setShowDoneMessage(true); // Set state to show done message
       // Handle success, redirection, or any other action here
     } catch (error) {
       console.error('Error adding course:', error);
@@ -74,6 +76,7 @@ const AddCourse = () => {
         </div>
         <button type="submit">Add Course</button>
       </form>
+      {showDoneMessage && <div>Course added successfully!</div>} {/* Display done message */}
     </div>
   );
 };
