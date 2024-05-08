@@ -55,7 +55,7 @@ const AddCourse = () => {
           <input type="text" id="code" name="code" value={courseData.code} onChange={handleChange} />
         </div>
         <div>
-          <label htmlFor="cname">Name:</label>
+          <label htmlFor="cname">Course Name:</label>
           <input type="text" id="cname" name="cname" value={courseData.cname} onChange={handleChange} />
         </div>
         <div>

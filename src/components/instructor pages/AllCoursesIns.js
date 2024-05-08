@@ -43,14 +43,14 @@ const AllCoursesInsPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                {courses.map(course => (
+                    {courses.map(course => (
                         <tr key={course._id}>
                             <td>{course.cname}</td>
                             <td>{course.code}</td>
                             <td>{course.description}</td>
                             <td>{course.credits}</td>
                             <td>
-                                {course.video || course.video.thumbnailUrl ? (
+                                {course.video && course.video.thumbnailUrl ? (
                                     <img src={course.video.thumbnailUrl} alt={course.video.title} style={{ width: '100px', height: 'auto' }} />
                                 ) : (
                                     <p>No video available</p>
@@ -63,8 +63,7 @@ const AllCoursesInsPage = () => {
                                 </Link>
                             </td>
                         </tr>
-                ))}
-
+                    ))}
                 </tbody>
             </table>
         </div>
