@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import axios from 'axios';
 
 const AllCoursesInsPage = () => {
@@ -42,25 +43,28 @@ const AllCoursesInsPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {courses.map(course => (
+                {courses.map(course => (
                         <tr key={course._id}>
                             <td>{course.cname}</td>
                             <td>{course.code}</td>
                             <td>{course.description}</td>
                             <td>{course.credits}</td>
                             <td>
-                                {course.videos.length > 0 && (
-                                    <img src={course.videos[0].thumbnailUrl} alt={course.videos[0].title} style={{ width: '100px', height: 'auto' }} />
-                                )}
-                                {!course.videos.length && (
-                                    <p>No videos available</p>
+                                {course.video || course.video.thumbnailUrl ? (
+                                    <img src={course.video.thumbnailUrl} alt={course.video.title} style={{ width: '100px', height: 'auto' }} />
+                                ) : (
+                                    <p>No video available</p>
                                 )}
                             </td>
                             <td>
                                 <button onClick={() => handleDelete(course.code)}>Delete</button>
+                                <Link to={`/course/${course.code}/edit`}>
+                                    <button>Edit</button>
+                                </Link>
                             </td>
                         </tr>
-                    ))}
+                ))}
+
                 </tbody>
             </table>
         </div>

@@ -4,7 +4,7 @@ import RegisterPage from './components/RegisterPage';
 import UserDetailsPage from './components/UserDetailsPage';
 import AllCourses from './components/AllCourses';
 import CreateComponent from './components/instructor pages/AddCourse';
-// import UpdateComponent from './components/UpdateComponent';
+import UpdateComponent from './components/instructor pages/EditCourseDetails';
 import AllCoursesIns from './components/instructor pages/AllCoursesIns';
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
         <Route path="/userdetails" element={<UserDetailsPage />} />
         <Route path="/allcourses" element={<AllCourses />} />
         <Route path="/course/add" element={<CreateComponent />} />
-        {/* <Route path="/course/:id/edit" element={<UpdateComponent />} /> */}
+        <Route path="/course/:code/edit" element={<UpdateComponent />} />
         <Route path="/allcoursesIns" element={<AllCoursesIns />} />
       </Routes>
     </Router>
