@@ -2,47 +2,80 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const AddCourse = () => {
-    const [cname, setCname] = useState('');
-    const [code, setCode] = useState('');
-    const [description, setDescription] = useState('');
-    const [credits, setCredits] = useState('');
-    const [faculty, setFaculty] = useState('');
+  const [courseData, setCourseData] = useState({
+    code: '',
+    cname: '',
+    description: '',
+    credits: '',
+    title: '',
+    video: null
+  });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const newCourse = {
-            cname,
-            code,
-            description,
-            credits,
-            faculty
-        };
+  const handleChange = (e) => {
+    setCourseData({ ...courseData, [e.target.name]: e.target.value });
+  };
 
-        try {
-            await axios.post('http://localhost:5000/course/add', newCourse, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            // Optionally: redirect or update state to reflect the addition
-        } catch (error) {
-            console.error('Error adding course:', error);
+  const handleVideoChange = (e) => {
+    setCourseData({ ...courseData, video: e.target.files[0] });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('code', courseData.code);
+    formData.append('cname', courseData.cname);
+    formData.append('description', courseData.description);
+    formData.append('credits', courseData.credits);
+    formData.append('title', courseData.title);
+    formData.append('video', courseData.video);
+
+    try {
+      const response = await axios.post('http://localhost:5002/course/add', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
         }
-    };
+      });
+      console.log('Course added:', response.data);
+      // Handle success, redirection, or any other action here
+    } catch (error) {
+      console.error('Error adding course:', error);
+      // Handle error response here
+    }
+  };
 
-    return (
+  return (
+    <div>
+      <h2>Add Course</h2>
+      <form onSubmit={handleSubmit}>
         <div>
-            <h1>Add New Course</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" value={cname} onChange={e => setCname(e.target.value)} placeholder="Course Name" />
-                <input type="text" value={code} onChange={e => setCode(e.target.value)} placeholder="Code" />
-                <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Description"></textarea>
-                <input type="text" value={credits} onChange={e => setCredits(e.target.value)} placeholder="Credits" />
-                <input type="text" value={faculty} onChange={e => setFaculty(e.target.value)} placeholder="Faculty" />
-                <button type="submit">Add Course</button>
-            </form>
+          <label htmlFor="code">Code:</label>
+          <input type="text" id="code" name="code" value={courseData.code} onChange={handleChange} />
         </div>
-    );
+        <div>
+          <label htmlFor="cname">Name:</label>
+          <input type="text" id="cname" name="cname" value={courseData.cname} onChange={handleChange} />
+        </div>
+        <div>
+          <label htmlFor="description">Description:</label>
+          <textarea id="description" name="description" value={courseData.description} onChange={handleChange} />
+        </div>
+        <div>
+          <label htmlFor="credits">Credits:</label>
+          <input type="text" id="credits" name="credits" value={courseData.credits} onChange={handleChange} />
+        </div>
+        <div>
+          <label htmlFor="title">Video Title:</label>
+          <input type="text" id="title" name="title" value={courseData.title} onChange={handleChange} />
+        </div>
+        <div>
+          <label htmlFor="video">Upload Video:</label>
+          <input type="file" id="video" name="video" onChange={handleVideoChange} />
+        </div>
+        <button type="submit">Add Course</button>
+      </form>
+    </div>
+  );
 };
 
 export default AddCourse;
