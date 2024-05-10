@@ -39,7 +39,7 @@ function PaymentGateway() {
         <div class="flex flex-col text-start gap-5">
           <h1 class="text-start text-3xl text-[#B9B0A0] font-bold my-4">Course: Java Full Course</h1>
           <h1 class="text-start text-3xl text-[#B9B0A0] font-bold my-4">Description: 2 moth full course</h1>
-          <h1 class="text-start text-3xl text-[#B9B0A0] font-bold my-4">Fee: $50</h1>
+          <h1 class="text-start text-3xl text-[#B9B0A0]    font-bold my-4">Fee: $50</h1>
         </div>
         
       <PayPalScriptProvider options={initialOptions}>
