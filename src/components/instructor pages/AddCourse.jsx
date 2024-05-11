@@ -32,9 +32,11 @@ const AddCourse = () => {
     formData.append('video', courseData.video);
 
     try {
+      const token = localStorage.getItem('token'); 
       const response = await axios.post('http://localhost:5002/course/add', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`
         }
       });
       console.log('Course added:', response.data);
@@ -45,6 +47,8 @@ const AddCourse = () => {
       // Handle error response here
     }
   };
+
+
 
   return (
     <div>

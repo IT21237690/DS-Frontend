@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const AllCoursesPage = () => {
@@ -16,6 +16,11 @@ const AllCoursesPage = () => {
 
         fetchCourses();
     }, []);
+
+    const handleThumbnailClick = (videoUrl) => {
+        // Play video by setting the videoUrl as the source
+        window.location.href = '/video-player?url=' + encodeURIComponent(videoUrl);
+    };
 
     return (
         <div>
@@ -38,11 +43,13 @@ const AllCoursesPage = () => {
                             <td>{course.description}</td>
                             <td>{course.credits}</td>
                             <td>
-                                {course.videos.length > 0 && (
-                                    <img src={course.videos[0].thumbnailUrl} alt={course.videos[0].title} style={{ width: '100px', height: 'auto' }} />
-                                )}
-                                {!course.videos.length && (
-                                    <p>No videos available</p>
+                                {course.video.thumbnail && (
+                                    <img 
+                                        src={`data:image/png;base64,${course.video.thumbnail}`} 
+                                        alt={course.cname + ' Thumbnail'} 
+                                        style={{ width: '100px', height: 'auto', cursor: 'pointer' }}
+                                        onClick={() => handleThumbnailClick(course.video.url)}
+                                    />
                                 )}
                             </td>
                         </tr>

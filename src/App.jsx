@@ -1,4 +1,4 @@
-import { Routes,Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import LoginPage from './components/LoginPage.jsx';
 import InsLoginPage from './components/instructor pages/InstructorLoginPage.jsx';
 import RegisterPage from './components/RegisterPage.jsx';
@@ -9,8 +9,7 @@ import CreateComponent from './components/instructor pages/AddCourse.jsx';
 import UpdateComponent from './components/instructor pages/EditCourseDetails.jsx';
 import AllCoursesIns from './components/instructor pages/AllCoursesIns.jsx';
 import PaymentGateway from "./PaymentGateway.jsx";
-
-import ProtectedRoute from './ProtectedRoute.jsx';
+import VideoPlayer from "./components/VideoPlayer.jsx"; // Import the VideoPlayer component
 
 function App() {
   return (
@@ -22,15 +21,15 @@ function App() {
             <Route path="/userdetails" element={<UserDetailsPage />} />
             <Route path="/Insdetails" element={<InsDetailsPage />} />
             <Route path="/allcourses" element={<AllCourses />} />
-            {/* Use ProtectedRoute for protected routes */}
-            <Route path="/course/add" element={<ProtectedRoute element={<CreateComponent />} />} />
-            <Route path="/course/:code/edit" element={<ProtectedRoute element={<UpdateComponent />} />} />
-            <Route path="/allcoursesIns" element={<ProtectedRoute element={<AllCoursesIns />} />} />
+            <Route path="/course/add" element={<CreateComponent />} />
+            <Route path="/course/:code/edit" element={<UpdateComponent />} />
+            <Route path="/allcoursesIns" element={<AllCoursesIns />} />
             <Route path="/payment" element={<PaymentGateway/>} />
+            {/* Define the route for the VideoPlayer component */}
+            <Route path="/video-player" element={<VideoPlayer />} />
         </Routes>
     </div>
   )
 }
-
 
 export default App;
