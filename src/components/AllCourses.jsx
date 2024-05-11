@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AllCoursesPage = () => {
     const [courses, setCourses] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -22,6 +25,11 @@ const AllCoursesPage = () => {
         window.location.href = '/video-player?url=' + encodeURIComponent(videoUrl);
     };
 
+    const handleEnroll = (courseCode) => {
+        // Assuming you're using React Router for navigation
+        navigate(`/payment?course=${courseCode}`);
+    };
+
     return (
         <div>
             <h1>All Courses</h1>
@@ -32,7 +40,8 @@ const AllCoursesPage = () => {
                         <th>Code</th>
                         <th>Description</th>
                         <th>Credits</th>
-                        <th>Thumbnail</th> {/* New column for thumbnails */}
+                        <th>Thumbnail</th>
+                        <th></th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -52,6 +61,7 @@ const AllCoursesPage = () => {
                                     />
                                 )}
                             </td>
+                            <td><button onClick={() => handleEnroll(course.code)}>Enroll</button></td>
                         </tr>
                     ))}
                 </tbody>

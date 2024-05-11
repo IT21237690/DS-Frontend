@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { Route, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 import './PaymentGateway.css'
@@ -11,6 +13,31 @@ function Message({ content }) {
 }
 
 function PaymentGateway() {
+
+  const [course, setCourse] = useState([]);
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const courseCode = queryParams.get('course');
+  console.log(courseCode);
+
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    const fetchCourse = async () => {
+        try {
+            const response = await axios.get('http://localhost:5002/course/get/' + `${courseCode}`);
+            setCourse(response.data);
+            console.log(response);
+
+        } catch (error) {
+            console.error('Error fetching courses:', error);
+        }
+    };
+
+    fetchCourse();
+}, []);
+
   const initialOptions = {
     "client-id": "AWa2aBW3CM4lCp3bo_b43TRdIWVUJIPd3VA_VzQKkijb6up1tLytIpQ8IbShOF-VeZLZXMyyoOgvL3BG",
     "enable-funding": "paylater,venmo",
@@ -34,14 +61,17 @@ function PaymentGateway() {
       {/* right */}
       <div className="flex flex-col gap-5 justify-center items-center min-h-screen w-full">
 
-          <h1 class="text-start text-4xl text-[#3889CD] font-bold my-4 underline">Summery</h1>
+          <h1 className="text-start text-4xl text-[#3889CD] font-bold my-4 underline">Summary</h1>
+          
 
-        <div class="flex flex-col text-start gap-5">
-          <h1 class="text-start text-3xl text-[#B9B0A0] font-bold my-4">Course: Java Full Course</h1>
-          <h1 class="text-start text-3xl text-[#B9B0A0] font-bold my-4">Description: 2 moth full course</h1>
-          <h1 class="text-start text-3xl text-[#B9B0A0]    font-bold my-4">Fee: $50</h1>
-        </div>
+        <div className="flex flex-col text-start gap-5">
         
+          <h1 className="text-start text-3xl text-[#B9B0A0] font-bold my-4">Course: {course.cname}</h1>
+          <h1 className="text-start text-3xl text-[#B9B0A0] font-bold my-4">Description: {course.description}</h1>
+          <h1 className="text-start text-3xl text-[#B9B0A0] font-bold my-4">Fee: $50</h1>
+        
+        </div>
+
       <PayPalScriptProvider options={initialOptions}>
           <PayPalButtons
             // style={{
@@ -52,10 +82,10 @@ function PaymentGateway() {
             className="w-full max-w-[500px]"
             createOrder={async () => {
               try {
-                const response = await fetch("/api/orders", {
+                const response = await fetch("/api/orders" , {
                   method: "POST",
                   headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                   },
                   // use the "body" param to optionally pass additional order information
                   // like product ids and quantities
@@ -89,11 +119,12 @@ function PaymentGateway() {
             onApprove={async (data, actions) => {
               try {
                 const response = await fetch(
-                  `/api/orders/${data.orderID}/capture`,
+                  `/api/orders/${data.orderID}/capture/` + `${courseCode}`,
                   {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
+                      Authorization: `Bearer ${token}`
                     },
                   },
                 );
