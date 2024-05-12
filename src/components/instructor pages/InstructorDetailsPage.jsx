@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode'; // Importing jwtDecode instead of default
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 const InsDetailsPage = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -11,8 +12,19 @@ const InsDetailsPage = () => {
     if (token) {
       try {
         // Decode the token to extract user details
-        const decodedToken = jwtDecode(token); // Using jwtDecode instead of jwt_decode
-        setUserDetails(decodedToken);
+        const decodedToken = jwtDecode(token);
+        const iid = decodedToken.iid;
+        
+        console.log(token);// Extract sid from the decoded token
+
+        // Make a request to the API endpoint to get user details using sid
+        axios.get(`http://localhost:5000/user/getins/${iid}`)
+          .then(response => {
+            setUserDetails(response.data);
+          })
+          .catch(error => {
+            setError('Error fetching user details: ' + error.message);
+          });
       } catch (error) {
         setError('Error decoding token: ' + error.message);
       }
@@ -28,9 +40,15 @@ const InsDetailsPage = () => {
         <p style={{ color: 'red' }}>{error}</p>
       ) : userDetails ? (
         <div>
-          <p>Name: {userDetails.name}</p>
-          <p>Email: {userDetails.email}</p>
-          {/* Add more details as needed */}
+          <p>Username: {userDetails.username}</p>
+          <p>Role: {userDetails.role}</p>
+          <p>IID: {userDetails.iid}</p>
+          <p>Added Courses:</p>
+          <ul>
+            {userDetails.addedCourses.map(course => (
+              <li key={course.courseCode}>{course.courseCode}</li>
+            ))}
+          </ul>
         </div>
       ) : (
         <p>No user details available</p>
