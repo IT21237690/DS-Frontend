@@ -34,7 +34,10 @@ const LoginPage = () => {
       setError(error.response.data.message || 'An error occurred');
     }
   };
-
+  const handleRegister = () => {
+    // const navigate = useNavigate();
+    navigate('/register'); 
+  };
 
   return (
     //  
@@ -53,9 +56,10 @@ const LoginPage = () => {
           <i class="fas fa-lock text-gray-400 mr-2"></i>  
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"/>
         </div>
-        <button type="submit" class="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Login</button>
+        <button type="submit" onClick={handleLogin} class="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Login</button>
       </form>
       <a href="#" class="text-sm text-center text-gray-600 hover:text-blue-500">Forgot Password?</a>
+      <button type="submit"onClick={handleRegister} class="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Register</button>
     </div>
   </div>
   

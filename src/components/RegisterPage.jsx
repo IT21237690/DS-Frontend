@@ -25,16 +25,48 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
-      <input type="email" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" />
-      <input type="text" value={role} onChange={(e) => setRole(e.target.value)} placeholder="Role" />
-      <button onClick={handleRegister}>Register</button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
+    // <div>
+    //   <h2>Register</h2>
+    //   <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
+    //   <input type="email" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Email" />
+    //   <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+    //   <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" />
+    //   <input type="text" value={role} onChange={(e) => setRole(e.target.value)} placeholder="Role" />
+    //   <button onClick={handleRegister}>Register</button>
+    //   {error && <p style={{ color: 'red' }}>{error}</p>}
+    // </div>
+
+
+    <div class="flex items-center min-h-screen bg-gray-200 bg-gradient-to-r from-gray-800 to-blue-900">
+  <div class="w-full max-w-md mx-auto p-8 space-y-4 bg-white rounded-xl shadow-md">
+    <h2 class="text-2xl font-semibold text-center text-gray-800">Register Now</h2>
+    {error && <p class="text-red-500 text-sm text-center">{error}</p>}
+    <form class="flex flex-col space-y-4">
+      <div class="flex items-center border-b border-gray-200 py-2">
+        <i class="fas fa-user text-gray-400 mr-2"></i>  <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full Name" class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
+      </div>
+      <div class="flex items-center border-b border-gray-200 py-2">
+        <i class="fas fa-at text-gray-400 mr-2"></i>  <input type="email" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Email Address" class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
+      </div>
+      <div class="flex items-center border-b border-gray-200 py-2">
+        <i class="fas fa-lock text-gray-400 mr-2"></i>  <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
+      </div>
+      <div class="flex items-center border-b border-gray-200 py-2">
+        <i class="fas fa-lock text-gray-400 mr-2"></i>  <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
+      </div>
+      <div class="flex items-center">
+        {/* <label for="role" class="text-gray-700 mr-2">Role:</label> */}
+        <select id="role" placeholder='role' value={role} onChange={(e) => setRole(e.target.value)} class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+          <option value="">Select Role</option>
+          <option value="student">Student</option>
+          <option value="instructor">Instructor</option>
+        </select>
+      </div>
+      <button type="submit" onClick={handleRegister} class="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Register</button>
+    </form>
+  </div>
+</div>
+
   );
 };
 
