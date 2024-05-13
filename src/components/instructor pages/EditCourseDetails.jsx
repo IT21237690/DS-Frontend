@@ -18,7 +18,7 @@ const EditCoursePage = () => {
         const fetchCourse = async () => {
             try {
                 console.log(code);
-                const response = await axios.get(`/api/course/get/${code}`);
+                const response = await axios.get(`http://localhost:5002/api/course/get/${code}`);
                 if (response.data.video) {
                     setCourseData(prevState => ({
                         ...prevState,
@@ -57,7 +57,7 @@ const EditCoursePage = () => {
         formData.append('video', courseData.video);
 
         try {
-            await axios.patch(`/api/course/update/${code}`, formData, {
+            await axios.patch(`http://localhost:5002/api/course/update/${code}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

@@ -16,7 +16,7 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await axios.post('/api/user/register', { name, username, password, role });
+      const response = await axios.post('http://localhost:5000/api/user/register', { name, username, password, role });
       // Handle successful registration, e.g., redirect to login page
       console.log(response.data);
     } catch (err) {

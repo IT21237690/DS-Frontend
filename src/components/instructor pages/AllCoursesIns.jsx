@@ -7,7 +7,7 @@ const AllCoursesInsPage = () => {
 
     const fetchCourses = async () => {
         try {
-            const response = await axios.get('/api/course/allCourses');
+            const response = await axios.get('http://localhost:5002/api/course/allCourses');
             setCourses(response.data);
         } catch (error) {
             console.error('Error fetching courses:', error);
@@ -20,7 +20,7 @@ const AllCoursesInsPage = () => {
 
     const handleDelete = async (code) => {
         try {
-            await axios.delete(`/api/course/delete/${code}`);
+            await axios.delete(`http://localhost:5002/api/course/delete/${code}`);
             // After successful deletion, refetch the courses to update the list
             fetchCourses();
         } catch (error) {
