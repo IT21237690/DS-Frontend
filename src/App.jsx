@@ -4,11 +4,11 @@ import InsLoginPage from './components/instructor pages/InstructorLoginPage.jsx'
 import RegisterPage from './components/RegisterPage.jsx';
 import UserDetailsPage from './components/UserDetailsPage.jsx';
 import InsDetailsPage from './components/instructor pages/InstructorDetailsPage.jsx';
-import Home from "./Components/home pages/Home.jsx";
-import About from "./Components/home pages/About.jsx";
-import Work from "./Components/home pages/Work.jsx";
-import Contact from "./Components/home pages/Contact.jsx";
-import Footer from "./Components/home pages/Footer.jsx";
+import Home from "./components/home pages/Home.jsx";
+import About from "./components/home pages/About.jsx";
+import Work from "./components/home pages/Work.jsx";
+import Contact from "./components/home pages/Contact.jsx";
+import Footer from "./components/home pages/Footer.jsx";
 import AllCourses from './components/AllCourses.jsx';
 import CreateComponent from './components/instructor pages/AddCourse.jsx';
 import UpdateComponent from './components/instructor pages/EditCourseDetails.jsx';
