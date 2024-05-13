@@ -82,7 +82,7 @@ function PaymentGateway() {
             className="w-full max-w-[500px]"
             createOrder={async () => {
               try {
-                const response = await fetch(`/api/orders/` + `${courseCode}` , {
+                const response = await fetch("/api/orders" , {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json"
@@ -169,7 +169,7 @@ function PaymentGateway() {
             }}
           />
         </PayPalScriptProvider>
-        <Message content={message} />
+        {/* <Message content={message} /> */}
       </div>
     </div>
   );
