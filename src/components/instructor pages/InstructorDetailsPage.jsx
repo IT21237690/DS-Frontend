@@ -18,7 +18,7 @@ const InsDetailsPage = () => {
         console.log(token);// Extract sid from the decoded token
 
         // Make a request to the API endpoint to get user details using sid
-        axios.get(`http://localhost:5000/user/getins/${iid}`)
+        axios.get(`/api/user/getins/${iid}`)
           .then(response => {
             setUserDetails(response.data);
           })

@@ -10,7 +10,7 @@ const InsLoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/user/login', {
+      const response = await axios.post('/api/user/login', {
         username: username,
         password: password
       }, {
