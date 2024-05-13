@@ -85,7 +85,7 @@ function PaymentGateway() {
                 const response = await fetch("http://localhost:5003/api/orders", {
                   method: "POST",
                   headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                   },
                   // use the "body" param to optionally pass additional order information
                   // like product ids and quantities
@@ -98,6 +98,7 @@ function PaymentGateway() {
                     ],
                   }),
                 });
+  
 
                 const orderData = await response.json();
 
