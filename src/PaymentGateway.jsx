@@ -169,7 +169,7 @@ function PaymentGateway() {
             }}
           />
         </PayPalScriptProvider>
-        <Message content={message} />
+        {/* <Message content={message} /> */}
       </div>
     </div>
   );
