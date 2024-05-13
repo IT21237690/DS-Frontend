@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 const EditCoursePage = () => {
     const navigate = useNavigate();
-    const { code } = useParams(); 
+    const { courseCode } = useParams(); 
     const [courseData, setCourseData] = useState({
         cname: '',
         description: '',
@@ -17,8 +17,8 @@ const EditCoursePage = () => {
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                console.log(code);
-                const response = await axios.get(`http://localhost:5002/api/course/get/${code}`);
+                console.log(courseCode);
+                const response = await axios.get(`http://localhost:5002/api/course/get/${courseCode}`);
                 if (response.data.video) {
                     setCourseData(prevState => ({
                         ...prevState,
@@ -36,7 +36,7 @@ const EditCoursePage = () => {
         };
     
         fetchCourse();
-    }, [code]);
+    }, [courseCode]);
 
     const handleChange = (e) => {
         setCourseData({ ...courseData, [e.target.name]: e.target.value });
@@ -57,13 +57,13 @@ const EditCoursePage = () => {
         formData.append('video', courseData.video);
 
         try {
-            await axios.patch(`http://localhost:5002/api/course/update/${code}`, formData, {
+            await axios.patch(`http://localhost:5002/api/course/update/${courseCode}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
             toast.success('Course updated successfully!');
-            navigate('/allcoursesIns');
+            navigate('/Insdetails');
         } catch (error) {
             console.error('Error updating course:', error);
         }

@@ -58,7 +58,7 @@ const AllCoursesInsPage = () => {
                             </td>
                             <td>
                                 <button onClick={() => handleDelete(course.code)}>Delete</button>
-                                <Link to={`/course/${course.code}/edit`}>
+                                <Link to={`/editcourse/${course.code}`}>
                                     <button>Edit</button>
                                 </Link>
                             </td>

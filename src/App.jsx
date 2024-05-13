@@ -27,7 +27,7 @@ function App() {
             <Route path="/Insdetails" element={<InsDetailsPage />} />
             <Route path="/allcourses" element={<AllCourses />} />
             <Route path="/course/add" element={<CreateComponent />} />
-            <Route path="/course/:code/edit" element={<UpdateComponent />} />
+            <Route path="/editcourse/:courseCode" element={<UpdateComponent />} />
             <Route path="/allcoursesIns" element={<AllCoursesIns />} />
             <Route path="/payment" element={<PaymentGateway/>} />
             {/* Define the route for the VideoPlayer component */}
