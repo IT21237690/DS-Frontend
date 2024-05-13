@@ -33,12 +33,13 @@ function App() {
             {/* Define the route for the VideoPlayer component */}
             <Route path="/video-player" element={<VideoPlayer />} />
 
-            <Route path="/About" element={<About />} />
-            <Route path="/Home" element={<Home />} />
-            <Route path="/Work" element={<Work />} />
-            <Route path="/Contact" element={<Contact />} />
-            <Route path="/Footer" element={<Footer />} />
-            
+            {/* Nested routes for the Home page */}
+            <Route path="/Home" element={<Home />}>
+              <Route path="about" element={<About />} />
+              <Route path="work" element={<Work />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="footer" element={<Footer />} />
+            </Route>
         </Routes>
     </div>
   )
