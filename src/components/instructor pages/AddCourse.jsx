@@ -6,7 +6,6 @@ const AddCourse = () => {
     code: '',
     cname: '',
     description: '',
-    credits: '',
     price: '',
     title: '',
     video: null
@@ -28,7 +27,6 @@ const AddCourse = () => {
     formData.append('code', courseData.code);
     formData.append('cname', courseData.cname);
     formData.append('description', courseData.description);
-    formData.append('credits', courseData.credits);
     formData.append('price', courseData.price);
     formData.append('title', courseData.title);
     formData.append('video', courseData.video);
@@ -67,10 +65,6 @@ const AddCourse = () => {
         <div>
           <label htmlFor="description">Description:</label>
           <textarea id="description" name="description" value={courseData.description} onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="credits">Credits:</label>
-          <input type="text" id="credits" name="credits" value={courseData.credits} onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="credits">Price:</label>

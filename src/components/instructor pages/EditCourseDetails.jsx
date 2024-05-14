@@ -9,7 +9,6 @@ const EditCoursePage = () => {
     const [courseData, setCourseData] = useState({
         cname: '',
         description: '',
-        credits: '',
         title: '',
         video: null
     });
@@ -24,7 +23,6 @@ const EditCoursePage = () => {
                         ...prevState,
                         cname: response.data.cname,
                         description: response.data.description,
-                        credits: response.data.credits,
                         title: response.data.video.title
                     }));
                 } else {
@@ -52,7 +50,6 @@ const EditCoursePage = () => {
         const formData = new FormData();
         formData.append('cname', courseData.cname);
         formData.append('description', courseData.description);
-        formData.append('credits', courseData.credits);
         formData.append('title', courseData.title);
         formData.append('video', courseData.video);
 
@@ -80,10 +77,6 @@ const EditCoursePage = () => {
                 <div>
                     <label htmlFor="description">Description:</label>
                     <textarea id="description" name="description" value={courseData.description} onChange={handleChange} />
-                </div>
-                <div>
-                    <label htmlFor="credits">Credits:</label>
-                    <input type="text" id="credits" name="credits" value={courseData.credits} onChange={handleChange} />
                 </div>
                 <div>
                     <label htmlFor="title">Video Title:</label>

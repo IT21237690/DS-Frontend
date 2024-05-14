@@ -14,7 +14,7 @@ import CreateComponent from './components/instructor pages/AddCourse.jsx';
 import UpdateComponent from './components/instructor pages/EditCourseDetails.jsx';
 import AllCoursesIns from './components/instructor pages/AllCoursesIns.jsx';
 import PaymentGateway from "./PaymentGateway.jsx";
-import VideoPlayer from "./components/VideoPlayer.jsx"; // Import the VideoPlayer component
+import VideoPlayer from "./components/VideoPlayer.jsx";
 
 function App() {
   return (

@@ -37,7 +37,6 @@ const AllCoursesInsPage = () => {
                         <th>Course Name</th>
                         <th>Code</th>
                         <th>Description</th>
-                        <th>Credits</th>
                         <th>Thumbnail</th>
                         <th>Actions</th>
                     </tr>
@@ -48,7 +47,6 @@ const AllCoursesInsPage = () => {
                             <td>{course.cname}</td>
                             <td>{course.code}</td>
                             <td>{course.description}</td>
-                            <td>{course.credits}</td>
                             <td>
                                 {course.video && course.video.thumbnailUrl ? (
                                     <img src={course.video.thumbnailUrl} alt={course.video.title} style={{ width: '100px', height: 'auto' }} />
