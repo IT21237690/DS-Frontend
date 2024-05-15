@@ -12,7 +12,9 @@ const AllCoursesPage = () => {
         const fetchCourses = async () => {
             try {
                 const response = await axios.get('http://localhost:5002/api/course/allCourses');
-                setCourses(response.data);
+                // Filter the courses to display only approved ones
+                const approvedCourses = response.data.filter(course => course.isApproved);
+                setCourses(approvedCourses);
             } catch (error) {
                 console.error('Error fetching courses:', error);
             }

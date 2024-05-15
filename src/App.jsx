@@ -14,7 +14,9 @@ import CreateComponent from './components/instructor pages/AddCourse.jsx';
 import UpdateComponent from './components/instructor pages/EditCourseDetails.jsx';
 import AllCoursesIns from './components/instructor pages/AllCoursesIns.jsx';
 import PaymentGateway from "./PaymentGateway.jsx";
-import VideoPlayer from "./components/VideoPlayer.jsx";
+import AdminPage from './components/AdminPage.jsx';
+
+
 
 function App() {
   return (
@@ -30,8 +32,8 @@ function App() {
             <Route path="/editcourse/:courseCode" element={<UpdateComponent />} />
             <Route path="/allcoursesIns" element={<AllCoursesIns />} />
             <Route path="/payment" element={<PaymentGateway/>} />
-            {/* Define the route for the VideoPlayer component */}
-            <Route path="/video-player" element={<VideoPlayer />} />
+            <Route path="/admin" element={<AdminPage/>} />
+
 
             {/* Nested routes for the Home page */}
             <Route path="/Home" element={<Home />}>

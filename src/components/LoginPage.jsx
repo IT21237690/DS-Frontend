@@ -15,6 +15,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
 
     e.preventDefault(); // Prevent default form submission behavior
+<<<<<<< Updated upstream
 
     if(username.length == 0 || password.length == 0){
 
@@ -45,11 +46,43 @@ const LoginPage = () => {
         }
       } catch (error) {
         setError(error.response.data.message || 'An error occurred');
+=======
+    
+
+    if (username === 'admin' && password === 'admin') {
+      
+       navigate('/admin');
+      console.log('Redirected to admin page');
+      return; 
+    }
+  
+    // If the username and password are not "admin", proceed with API call
+    try {
+      const response = await axios.post('http://localhost:5000/api/user/login', {
+        username: username,
+        password: password
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      if (response && response.data && response.data.token) {
+        const token = response.data.token;
+        // Save the token to local storage or session storage
+        localStorage.setItem('token', token); // Save token to local storage
+  
+        // Redirect the user to the user details page
+        navigate('/userdetails');
+        console.log('Login successful');
+      } else {
+        setError('Invalid username or password');
+>>>>>>> Stashed changes
       }
 
     }    
   };
-
+  
   const handleRegister = () => {
     navigate('/register'); 
   };

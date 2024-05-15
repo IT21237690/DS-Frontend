@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const AllCoursesInsPage = () => {
@@ -29,6 +29,7 @@ const AllCoursesInsPage = () => {
     };
 
     return (
+<<<<<<< Updated upstream
         <div className="relative">
   <button className="absolute mt-4 ml-8 bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-600 transition duration-300" onClick={() => handleNavigateToHome()}>
     Home
@@ -73,6 +74,49 @@ const AllCoursesInsPage = () => {
   </div>
 </div>
 
+=======
+        <div>
+            <h1>All Courses</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th>Thumbnail</th>
+                        <th>Approved</th> {/* New column for approved status */}
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {courses.map(course => (
+                        <tr key={course._id}>
+                            <td>{course.cname}</td>
+                            <td>{course.code}</td>
+                            <td>{course.description}</td>
+                            <td>
+                            {course.video.thumbnail && (
+                                    <img 
+                                        src={`data:image/png;base64,${course.video.thumbnail}`} 
+                                        alt={course.cname + ' Thumbnail'} 
+                                        style={{ width: '100px', height: 'auto', cursor: 'pointer' }}
+                                        onClick={() => handleThumbnailClick(course.video.url)}
+                                    />
+                                )}
+                            </td>
+                            <td>{course.isApproved ? 'Approved' : 'Not Approved'}</td> {/* Display approved status */}
+                            <td>
+                                <button onClick={() => handleDelete(course.code)}>Delete</button>
+                                <Link to={`/editcourse/${course.code}`}>
+                                    <button>Edit</button>
+                                </Link>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+>>>>>>> Stashed changes
     );
 };
 
