@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,13 +9,12 @@ const LoginPage = () => {
   const navigate = useNavigate(); 
 
   const [validationError, setValidationError] = useState(false);
-  const [message, setMessage] = useState('');
+  //const [message, setMessage] = useState('');
 
 
   const handleLogin = async (e) => {
 
     e.preventDefault(); // Prevent default form submission behavior
-<<<<<<< Updated upstream
 
     if(username.length == 0 || password.length == 0){
 
@@ -46,38 +45,6 @@ const LoginPage = () => {
         }
       } catch (error) {
         setError(error.response.data.message || 'An error occurred');
-=======
-    
-
-    if (username === 'admin' && password === 'admin') {
-      
-       navigate('/admin');
-      console.log('Redirected to admin page');
-      return; 
-    }
-  
-    // If the username and password are not "admin", proceed with API call
-    try {
-      const response = await axios.post('http://localhost:5000/api/user/login', {
-        username: username,
-        password: password
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-  
-      if (response && response.data && response.data.token) {
-        const token = response.data.token;
-        // Save the token to local storage or session storage
-        localStorage.setItem('token', token); // Save token to local storage
-  
-        // Redirect the user to the user details page
-        navigate('/userdetails');
-        console.log('Login successful');
-      } else {
-        setError('Invalid username or password');
->>>>>>> Stashed changes
       }
 
     }    
@@ -106,13 +73,13 @@ const LoginPage = () => {
             <i className="fas fa-user text-gray-400 mr-2"></i>  
             <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />            
           </div>
-          {validationError && username.length<=0?<label htmlFor="username" className='text-red-500'>*Username field can't be empty</label>:""}
+          {validationError && username.length<=0?<label htmlFor="username" className='text-red-500'>*Username field cannot be empty</label>:""}
 
           <div className="flex items-center border-b border-gray-200 py-2">
             <i className="fas fa-lock text-gray-400 mr-2"></i>  
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"/>
           </div>
-          {validationError && password.length<=0?<label htmlFor="username" className='text-red-500'>*Password field can't be empty</label>:""}
+          {validationError && password.length<=0?<label htmlFor="username" className='text-red-500'>*Password field cannot be empty</label>:""}
 
           <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Login</button>
 
