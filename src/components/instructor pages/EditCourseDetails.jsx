@@ -67,28 +67,32 @@ const EditCoursePage = () => {
     };
 
     return (
-        <div>
-            <h1>Edit Course</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="cname">Course Name:</label>
-                    <input type="text" id="cname" name="cname" value={courseData.cname} onChange={handleChange} />
-                </div>
-                <div>
-                    <label htmlFor="description">Description:</label>
-                    <textarea id="description" name="description" value={courseData.description} onChange={handleChange} />
-                </div>
-                <div>
-                    <label htmlFor="title">Video Title:</label>
-                    <input type="text" id="title" name="title" value={courseData.title} onChange={handleChange} />
-                </div>
-                <div>
-                    <label htmlFor="video">Upload Video:</label>
-                    <input type="file" id="video" name="video" onChange={handleVideoChange} />
-                </div>
-                <button type="submit">Update Course</button>
-            </form>
-        </div>
+        <div className="container mx-auto px-4 py-8 bg-gray-300 rounded-lg shadow-lg m-4">
+            <button onClick={() => handleGoBack()} className="absolute top-4 left-8 m-2 bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-600 transition duration-300">
+    Back
+  </button>
+  <h1 className="text-3xl font-bold text-blue-900 mb-6 text-center">Edit Course</h1>
+  <form onSubmit={handleSubmit}>
+    <div className="mb-4">
+      <label htmlFor="cname" className="block text-gray-700 font-semibold mb-2">Course Name:</label>
+      <input type="text" id="cname" name="cname" value={courseData.cname} onChange={handleChange} className="w-full px-4 py-2 bg-white rounded-lg shadow-md focus:outline-none focus:ring focus:border-blue-500" />
+    </div>
+    <div className="mb-4">
+      <label htmlFor="description" className="block text-gray-700 font-semibold mb-2">Description:</label>
+      <textarea id="description" name="description" value={courseData.description} onChange={handleChange} className="w-full px-4 py-2 bg-white rounded-lg shadow-md focus:outline-none focus:ring focus:border-blue-500"></textarea>
+    </div>
+    <div className="mb-4">
+      <label htmlFor="title" className="block text-gray-700 font-semibold mb-2">Video Title:</label>
+      <input type="text" id="title" name="title" value={courseData.title} onChange={handleChange} className="w-full px-4 py-2 bg-white rounded-lg shadow-md focus:outline-none focus:ring focus:border-blue-500" />
+    </div>
+    <div className="mb-4">
+      <label htmlFor="video" className="block text-gray-700 font-semibold mb-2">Upload Video:</label>
+      <input type="file" id="video" name="video" onChange={handleVideoChange} className="w-full px-4 py-2 bg-white rounded-lg shadow-md focus:outline-none focus:ring focus:border-blue-500" />
+    </div>
+    <button type="submit" className="bg-gray-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-gray-600 transition duration-300">Update Course</button>
+  </form>
+</div>
+
     );
 };
 
