@@ -52,10 +52,12 @@ const RegisterPage = () => {
     // </div>
 
 
-    <div class="flex items-center min-h-screen bg-gray-200 bg-gradient-to-r from-gray-800 to-blue-900">
+<div className="grid lg:grid-cols-2 sm:grid-cols-1 items-center min-h-screen overflow-hidden bg-gray-200 bg-gradient-to-r from-white to-blue-500">  <div className="sm:flex">
+        <img src="../../public/signup.jpg" alt="E-learning platform" className="h-fit  object-cover rounded-xl m-4" />
+      </div>
   <div class="w-full max-w-md mx-auto p-8 space-y-4 bg-white rounded-xl shadow-md">
 
-    <h2 class="text-2xl font-semibold text-center text-gray-800">Register Now</h2>
+    <h2 class="text-2xl font-semibold text-center text-gray-800">REGISTER NOW</h2>
 
     {error && <p class="text-red-500 text-sm text-center">{error}</p>}
 
@@ -84,7 +86,7 @@ const RegisterPage = () => {
 
       <div class="flex items-center">
         {/* <label for="role" class="text-gray-700 mr-2">Role:</label> */}
-        <select id="role" placeholder='role' value={role} onChange={(e) => setRole(e.target.value)} class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+        <select id="role" placeholder='role' value={role} onChange={(e) => setRole(e.target.value)} class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring text-gray-500 focus:ring-blue-500 focus:ring-opacity-50">
           <option value="">Select Role</option>
           <option value="student">Student</option>
           <option value="instructor">Instructor</option>
@@ -93,6 +95,7 @@ const RegisterPage = () => {
       {validationError && role.length<=0?<label className='text-red-500'>*Role filed can't be empty</label>:''}
 
       <button type="submit" onClick={handleRegister} class="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Register</button>
+      <a href="/login" className="text-sm text-center text-gray-600 hover:text-blue-500">Back to login</a>
 
     </form>
   </div>
