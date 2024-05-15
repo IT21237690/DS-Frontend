@@ -42,7 +42,7 @@ const UserDetailsPage = () => {
     <img src="/profile.jpg" alt="User Profile" className="absolute inset-0 w-full h-full object-cover z-0" />
     <div className="absolute top-4 left-4">
       <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300" onClick={handleHome}>
-        Courses
+        Home
       </button>
     </div>
     <div className="relative max-w-md mx-auto shadow-lg rounded-lg overflow-hidden z-10 bg-gray-200 bg-opacity-70 p-6 w-96">

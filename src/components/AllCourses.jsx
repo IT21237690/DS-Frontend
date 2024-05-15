@@ -77,44 +77,59 @@ const AllCoursesPage = () => {
         return 'download.mp4'; // Default filename
     };
 
+    const handleHome = () => {
+        navigate('/home'); 
+      }
+
     return (
-        <div>
-            <h1>All Courses</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course Name</th>
-                        <th>Code</th>
-                        <th>Description</th>
-                        <th>Thumbnail</th>
-                        <th>Actions</th> 
-                    </tr>
-                </thead>
-                <tbody>
-                    {courses.map(course => (
-                        <tr key={course._id}>
-                            <td>{course.cname}</td>
-                            <td>{course.code}</td>
-                            <td>{course.description}</td>
-                            <td>
-                                {course.video.thumbnail && (
-                                    <img 
-                                        src={`data:image/png;base64,${course.video.thumbnail}`} 
-                                        alt={course.cname + ' Thumbnail'} 
-                                        style={{ width: '100px', height: 'auto', cursor: 'pointer' }}
-                                        onClick={() => handleThumbnailClick(course.video.url)}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                <button onClick={() => handleEnroll(course.code)}>Enroll</button>
-                                <button onClick={() => handleDownload(course.code)}>Download</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
+        
+        <div className="relative">
+        <button onClick={handleHome} className="absolute mt-4 ml-8 bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-500 transition duration-300" >
+          Home
+        </button>
+        <div className="container mx-auto px-4 py-8 bg-gradient-to-r bg-cyan-900 bg-opacity-50 rounded-2xl m-8 h-svh">
+          <h1 className="text-3xl font-bold text-gray-800 mb-4 text-center">All Courses</h1>
+          <div className="overflow-x-auto">
+            <table className="w-full whitespace-nowrap overflow-auto">
+              <thead>
+                <tr className="bg-gray-200">
+                  <th className="py-3 px-4 font-semibold text-gray-700">Course Name</th>
+                  <th className="py-3 px-4 font-semibold text-gray-700">Code</th>
+                  <th className="py-3 px-4 font-semibold text-gray-700">Description</th>
+                  <th className="py-3 px-4 font-semibold text-gray-700">Thumbnail</th>
+                  <th className="py-3 px-4 font-semibold text-gray-700">Actions</th> 
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {courses.map(course => (
+                  <tr key={course._id}>
+                    <td className="py-4 px-4">{course.cname}</td>
+                    <td className="py-4 px-4">{course.code}</td>
+                    <td className="py-4 px-4">{course.description}</td>
+                    <td className="py-4 px-4">
+                      {course.video.thumbnail && (
+                        <img 
+                          src={`data:image/png;base64,${course.video.thumbnail}`} 
+                          alt={course.cname + ' Thumbnail'} 
+                          className="w-24 h-auto cursor-pointer"
+                          onClick={() => handleThumbnailClick(course.video.url)}
+                        />
+                      )}
+                    </td>
+                    <td className="py-4 px-4">
+                      <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md mr-2 hover:bg-blue-600 transition duration-300" onClick={() => handleEnroll(course.code)}>Enroll</button>
+                      <button className="bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-600 transition duration-300" onClick={() => handleDownload(course.code)}>Download</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
+          </div>
         </div>
+      </div>
+      
+
+
     );
 };
 
