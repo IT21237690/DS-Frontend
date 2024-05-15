@@ -65,10 +65,12 @@ const EditCoursePage = () => {
             console.error('Error updating course:', error);
         }
     };
-
+const handleGoBack =()=>{
+    navigate('/allcoursesIns')
+}
     return (
         <div className="container mx-auto px-4 py-8 bg-gray-300 rounded-lg shadow-lg m-4">
-            <button onClick={() => handleGoBack()} className="absolute top-4 left-8 m-2 bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-600 transition duration-300">
+            <button onClick={handleGoBack} className="absolute top-4 left-8 m-2 bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-600 transition duration-300">
     Back
   </button>
   <h1 className="text-3xl font-bold text-blue-900 mb-6 text-center">Edit Course</h1>
