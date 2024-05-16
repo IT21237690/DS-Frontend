@@ -86,6 +86,7 @@ nav {
 .primary-heading {
   font-size: clamp(2rem, 5vw, 4rem);
   color: #4c4c4c;
+  font-weight: bold; /* Added font-weight for bold text */
   /* line-height: 5rem; */
   max-width: 600px;
 }
