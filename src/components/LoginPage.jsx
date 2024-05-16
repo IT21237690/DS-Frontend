@@ -13,31 +13,40 @@ const LoginPage = () => {
 
 
   const handleLogin = async (e) => {
-
     e.preventDefault(); // Prevent default form submission behavior
-
-    if(username.length == 0 || password.length == 0){
-
+  
+    if (username.length === 0 || password.length === 0) {
       setValidationError(true);
-
-    }else{
-
+    } else {
       try {
-        const response = await axios.post('http://localhost:5000/api/user/login', {
-          username: username,
-          password: password
-        }, {
-          headers: {
-            'Content-Type': 'application/json'
+        // Check if the username and password are both 'admin'
+        if (username === 'admin' && password === 'admin') {
+          // Redirect to the admin page
+          navigate('/admin');
+          console.log('Admin login successful');
+          return; // Exit the function to prevent further execution
+        }
+  
+        // If not 'admin', proceed with the regular login process
+        const response = await axios.post(
+          'http://localhost:5000/api/user/login',
+          {
+            username: username,
+            password: password,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
           }
-        });
+        );
   
         if (response && response.data && response.data.token) {
           const token = response.data.token;
           // Save the token to local storage or session storage
           localStorage.setItem('token', token); // Save token to local storage
   
-          // Redirect the user to the user details page
+          // Redirect the user to user details page
           navigate('/userdetails');
           console.log('Login successful');
         } else {
@@ -46,9 +55,10 @@ const LoginPage = () => {
       } catch (error) {
         setError(error.response.data.message || 'An error occurred');
       }
-
-    }    
+    }
   };
+  
+  
   
   const handleRegister = () => {
     navigate('/register'); 
