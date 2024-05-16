@@ -1,7 +1,8 @@
 import React, { useState,useEffect } from "react";
-import { Route, useLocation } from 'react-router-dom';
+import { Route, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import Swal from 'sweetalert2'
 
 import './PaymentGateway.css'
 
@@ -13,10 +14,14 @@ function Message({ content }) {
 function PaymentGateway() {
 
   const [course, setCourse] = useState([]);
+  const [price, setPrice] = useState();
 
   const location = useLocation();
+  const navigate = useNavigate();
+
   const queryParams = new URLSearchParams(location.search);
   const courseCode = queryParams.get('course');
+  
   console.log(courseCode);
 
   const token = localStorage.getItem('token');
@@ -26,7 +31,9 @@ function PaymentGateway() {
         try {
             const response = await axios.get('http://localhost:5002/api/course/get/' + `${courseCode}`);
             setCourse(response.data);
-            console.log(response);
+            const afterPrice = response.data.price.replace("$", "");
+            setPrice(afterPrice)
+            // console.log(response);
 
         } catch (error) {
             console.error('Error fetching courses:', error);
@@ -43,6 +50,7 @@ function PaymentGateway() {
   };
 
   const [message, setMessage] = useState("");
+//   console.log(course.price)
 
   return (
     <div className="grid lg:grid-cols-2 sm:grid-cols-1 items-center min-h-screen bg-gray-200 bg-gradient-to-r from-blue-500 to-blue-500">
@@ -54,15 +62,15 @@ function PaymentGateway() {
             <div className="flex flex-col space-y-4">
 
                 <div className="flex items-center border-b border-gray-200 py-2">
-                    <h1 className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Course: {course.cname}</h1>
+                    <h1 className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"><b>Course:</b> {course.cname}</h1>
                 </div>
 
                 <div className="flex items-center border-b border-gray-200 py-2">                    
-                    <h1 className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Description: {course.description}</h1>
+                    <h1 className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"><b>Description:</b> {course.description}</h1>
                 </div>
 
                 <div className="flex items-center border-b border-gray-200 py-2">                    
-                    <h1 className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Fee: {course.price}</h1>
+                    <h1 className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"><b>Fee:</b> ${price}</h1>
                 </div>
 
                 <div>
@@ -76,7 +84,7 @@ function PaymentGateway() {
                             className="w-full max-w-[500px]"
                             createOrder={async () => {
                             try {
-                                const response = await fetch("http://localhost:5003/api/orders", {
+                                const response = await fetch(`http://localhost:5003/api/orders/` + `${courseCode}`, {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
@@ -86,8 +94,8 @@ function PaymentGateway() {
                                 body: JSON.stringify({
                                     cart: [
                                     {
-                                        id: "YOUR_PRODUCT_ID",
-                                        quantity: "YOUR_PRODUCT_QUANTITY",
+                                        id: courseCode,
+                                        quantity: "YourQuantity",
                                     },
                                     ],
                                 }),
@@ -125,6 +133,7 @@ function PaymentGateway() {
                                 );
 
                                 const orderData = await response.json();
+                                console.log(orderData,"This is orderData");
                                 // Three cases to handle:
                                 //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
                                 //   (2) Other non-recoverable errors -> Show a failure message
@@ -142,29 +151,47 @@ function PaymentGateway() {
                                     `${errorDetail.description} (${orderData.debug_id})`,
                                 );
                                 } else {
-                                // (3) Successful transaction -> Show confirmation or thank you message
-                                // Or go to another URL:  actions.redirect('thank_you.html');
-                                const transaction =
-                                    orderData.purchase_units[0].payments.captures[0];
-                                setMessage(
-                                    `Transaction ${transaction.status}: ${transaction.id}. See console for all available details`,
-                                );
-                                console.log(
-                                    "Capture result",
-                                    orderData,
-                                    JSON.stringify(orderData, null, 2),
-                                );
+                                    // (3) Successful transaction -> Show confirmation or thank you message
+                                    // Or go to another URL:  actions.redirect('thank_you.html');
+                                    const transaction =
+                                        orderData.purchase_units[0].payments.captures[0];
+                                    setMessage(
+                                        `Transaction ${transaction.status}: ${transaction.id}. See console for all available details`,
+                                    );
+
+                                    
+                                    
+                                    console.log(
+                                        "Capture result",
+                                        orderData,
+                                        JSON.stringify(orderData, null, 2),
+                                    );
+
+                                    Swal.fire({
+                                        title: "Payment Completed!",
+                                        text: "Enjoy your course!",
+                                        icon: "success"
+                                    });
+
+                                    navigate('/allcourses');
+
                                 }
                             } catch (error) {
                                 console.error(error);
                                 setMessage(
                                 `Sorry, your transaction could not be processed...${error}`,
                                 );
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: "Something went wrong!"
+                                  });
                             }
                             }}
                         />
                     </PayPalScriptProvider>
-                    {/* <Message content={message} /> */}
+                    <Message content={message} />
                 </div>
 
 
