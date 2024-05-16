@@ -1,10 +1,19 @@
-import React from "react";
 import BannerBackground from "../../assets/home-banner-background.png";
 import BannerImage from "../../assets/new2.png";
 import Navbar from "./Navbar";
 import { FiArrowRight } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
+
 
 const Home = () => {
+
+  const navigate = useNavigate(); 
+
+
+  const handleRegister = () => {
+    navigate('/register'); 
+  }
+
   return (
     <div className="home-container">
       <Navbar />
@@ -19,7 +28,7 @@ const Home = () => {
           <p className="primary-text">
           Empowering learners worldwide with personalized, interactive, and accessible education!
           </p>
-          <button className="secondary-button">
+          <button className="secondary-button" onClick={handleRegister}>
             Register Now!<FiArrowRight />{" "}
           </button>
         </div>

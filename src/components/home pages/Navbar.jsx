@@ -14,7 +14,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -43,11 +42,11 @@ const Navbar = () => {
       <span className="nav-text" style={{ color: "#03b3ef", fontSize: "40px", fontWeight: "bold" }}>Wishwa</span>
       </div>
       <div className="navbar-links-container">
-        <a href="">Home</a>
+        <a href="/">Home</a>
         <a href="">About</a>
-        <a href="">Log in</a>
+        <a href="/login">Log in</a>
 
-        <button className="primary-button">Register Now</button>
+        <a href="/register"><button className="primary-button">Register Now</button></a>
       </div>
       <div className="navbar-menu-container">
         <HiOutlineBars3 onClick={() => setOpenMenu(true)} />

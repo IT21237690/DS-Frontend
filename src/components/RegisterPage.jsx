@@ -1,9 +1,14 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2'
+
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('');
@@ -11,7 +16,6 @@ const RegisterPage = () => {
 
   const [validationError, setValidationError] = useState(false);
   const [passwordMismatchError, setPasswordMismatchError] = useState(false);
-  const [message, setMessage] = useState('');
 
   const handleRegister = async (e) => {
 
@@ -33,6 +37,15 @@ const RegisterPage = () => {
         const response = await axios.post('http://localhost:5000/api/user/register', { name, username, password, role });
         // Handle successful registration, e.g., redirect to login page
         console.log(response.data);
+        Swal.fire({
+          title: "User Registered Successfully",
+          icon: "success"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/login"; // Redirect to the login page
+          }
+        });
+        
       } catch (err) {
         setError(err.response.data.message || 'An error occurred');
       }
@@ -55,38 +68,67 @@ const RegisterPage = () => {
 <div className="grid lg:grid-cols-2 sm:grid-cols-1 items-center min-h-screen overflow-hidden bg-gray-200 bg-gradient-to-r from-white to-blue-500">  <div className="sm:flex">
         <img src="../../public/signup.jpg" alt="E-learning platform" className="h-fit  object-cover rounded-xl m-4" />
       </div>
-  <div class="w-full max-w-md mx-auto p-8 space-y-4 bg-white rounded-xl shadow-md">
+  <div className="w-full max-w-md mx-auto p-8 space-y-4 bg-white rounded-xl shadow-md">
 
-    <h2 class="text-2xl font-semibold text-center text-gray-800">REGISTER NOW</h2>
+    <h2 className="text-2xl font-semibold text-center text-gray-800">REGISTER NOW</h2>
 
-    {error && <p class="text-red-500 text-sm text-center">{error}</p>}
+    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
-    <form class="flex flex-col space-y-4">
+    <form className="flex flex-col space-y-4">
 
-      <div class="flex items-center border-b border-gray-200 py-2">
-        <i class="fas fa-user text-gray-400 mr-2"></i>  <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full Name" class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
+      <div className="flex items-center border-b border-gray-200 py-2">
+        <i className="fas fa-user text-gray-400 mr-2"></i>  <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full Name" className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
       </div>
       {validationError && name.length<=0?<label className='text-red-500'>*Name filed can't be empty</label>:''}
 
-      <div class="flex items-center border-b border-gray-200 py-2">
-        <i class="fas fa-at text-gray-400 mr-2"></i>  <input type="email" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Email Address" class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
+      <div className="flex items-center border-b border-gray-200 py-2">
+        <i className="fas fa-at text-gray-400 mr-2"></i>  <input type="email" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Email Address" className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
       </div>
       {validationError && username.length<=0?<label className='text-red-500'>*Email filed can't be empty</label>:''}
 
-      <div class="flex items-center border-b border-gray-200 py-2">
-        <i class="fas fa-lock text-gray-400 mr-2"></i>  <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
+      <div className="flex items-center border-b border-gray-200 py-2">
+        <i className="fas fa-lock text-gray-400 mr-2"></i>  <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
       </div>
       {validationError && password.length<=0?<label className='text-red-500'>*Password filed can't be empty</label>:''}
 
-      <div class="flex items-center border-b border-gray-200 py-2">
-        <i class="fas fa-lock text-gray-400 mr-2"></i>  <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
+      <div className="flex items-center border-b border-gray-200 py-2">
+        <i className="fas fa-lock text-gray-400 mr-2"></i>  <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
       </div>
       {validationError && confirmPassword.length<=0?<label className='text-red-500'>*Password Confirmation filed can't be empty</label>:''}
       {passwordMismatchError && password !== confirmPassword?<label className='text-red-500'>*Confirmation Password should be same as Password.</label>:''}
 
-      <div class="flex items-center">
+      <div className="flex items-center border-b border-gray-200 py-2">
+          <i className="fas fa-phone text-gray-400 mr-2"></i>
+          <input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="Phone Number"
+            className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          />
+        </div>
+        {validationError && phone.length <= 0 && (
+          <label className="text-red-500">*Phone field can't be empty</label>
+        )}
+
+        <div className="flex items-center border-b border-gray-200 py-2">
+          <i className="fas fa-envelope text-gray-400 mr-2"></i>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email Address"
+            className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          />
+        </div>
+        {validationError && email.length <= 0 && (
+          <label className="text-red-500">*Email field can't be empty</label>
+        )}
+
+
+      <div className="flex items-center">
         {/* <label for="role" class="text-gray-700 mr-2">Role:</label> */}
-        <select id="role" placeholder='role' value={role} onChange={(e) => setRole(e.target.value)} class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring text-gray-500 focus:ring-blue-500 focus:ring-opacity-50">
+        <select id="role" placeholder='role' value={role} onChange={(e) => setRole(e.target.value)} className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring text-gray-500 focus:ring-blue-500 focus:ring-opacity-50">
           <option value="">Select Role</option>
           <option value="student">Student</option>
           <option value="instructor">Instructor</option>
@@ -94,7 +136,7 @@ const RegisterPage = () => {
       </div>
       {validationError && role.length<=0?<label className='text-red-500'>*Role filed can't be empty</label>:''}
 
-      <button type="submit" onClick={handleRegister} class="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Register</button>
+      <button type="submit" onClick={handleRegister} className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Register</button>
       <a href="/login" className="text-sm text-center text-gray-600 hover:text-blue-500">Back to login</a>
 
     </form>
