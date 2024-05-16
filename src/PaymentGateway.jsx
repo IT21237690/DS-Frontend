@@ -45,7 +45,7 @@ function PaymentGateway() {
   const [message, setMessage] = useState("");
 
   return (
-    <div className="grid lg:grid-cols-2 sm:grid-cols-1 items-center min-h-screen bg-gray-200 bg-gradient-to-r from-white to-blue-500">
+    <div className="grid lg:grid-cols-2 sm:grid-cols-1 items-center min-h-screen bg-gray-200 bg-gradient-to-r from-blue-500 to-blue-500">
         <div className="sm:flex">
             <img src="/pay.svg" alt="" />
         </div>
