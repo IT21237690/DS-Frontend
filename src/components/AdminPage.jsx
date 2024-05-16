@@ -13,7 +13,7 @@ const AdminPage = () => {
 
   const fetchUnapprovedCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:5002/api/course/allCourses');
+      const response = await axios.get('http://localhost:9080/api/course/allCourses');
       // Extract courses directly from response data
       const unapprovedCourses = response.data.filter(course => !course.isApproved);
       setCourses(unapprovedCourses);
@@ -27,7 +27,7 @@ const AdminPage = () => {
 
   const handleApprove = async (code) => {
     try {
-      await axios.put(`http://localhost:5000/api/user/admin/${code}/approve`);
+      await axios.put(`http://localhost:9080/api/user/admin/${code}/approve`);
       // After approving, remove the approved course from the list
       setCourses(courses.filter(course => course.code !== code));
     } catch (error) {
@@ -37,7 +37,7 @@ const AdminPage = () => {
 
   const handleDelete = async (code) => {
     try {
-      await axios.delete(`http://localhost:5002/api/course/delete/${code}`);
+      await axios.delete(`http://localhost:9080/api/course/delete/${code}`);
       // After deleting, remove the deleted course from the list
       setCourses(courses.filter(course => course.code !== code));
     } catch (error) {

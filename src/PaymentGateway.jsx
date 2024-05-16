@@ -29,7 +29,7 @@ function PaymentGateway() {
   useEffect(() => {
     const fetchCourse = async () => {
         try {
-            const response = await axios.get('http://localhost:5002/api/course/get/' + `${courseCode}`);
+            const response = await axios.get('http://localhost:9080/api/course/get/' + `${courseCode}`);
             setCourse(response.data);
             const afterPrice = response.data.price.replace("$", "");
             setPrice(afterPrice)
@@ -84,7 +84,7 @@ function PaymentGateway() {
                             className="w-full max-w-[500px]"
                             createOrder={async () => {
                             try {
-                                const response = await fetch(`http://localhost:5003/api/orders/` + `${courseCode}`, {
+                                const response = await fetch(`http://localhost:9080/api/orders/` + `${courseCode}`, {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
@@ -122,7 +122,7 @@ function PaymentGateway() {
                             onApprove={async (data, actions) => {
                             try {
                                 const response = await fetch(
-                                `http://localhost:5003/api/orders/${data.orderID}/capture/` + `${courseCode}`,
+                                `http://localhost:9080/api/orders/${data.orderID}/capture/` + `${courseCode}`,
                                 {
                                     method: "POST",
                                     headers: {

@@ -29,7 +29,7 @@ const LoginPage = () => {
   
         // If not 'admin', proceed with the regular login process
         const response = await axios.post(
-          'http://localhost:5000/api/user/login',
+          'http://localhost:9080/api/user/login',
           {
             username: username,
             password: password,
@@ -94,7 +94,7 @@ const LoginPage = () => {
           <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Login</button>
 
         </form>
-        <a href="#" className="text-sm text-center text-gray-600 hover:text-blue-500">Forgot Password?</a>
+        <a href="/Inslogin" className="text-sm text-center text-red-600 hover:text-blue-500" style={{ display: 'block', margin: 'auto', marginTop: '10px' }}>Instructor Login</a>
         <button type="button" onClick={handleRegister} className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Register</button>
       </div>
     </div>

@@ -34,7 +34,7 @@ const RegisterPage = () => {
       // }
   
       try {
-        const response = await axios.post('http://localhost:5000/api/user/register', { name, username, password, role });
+        const response = await axios.post('http://localhost:9080/api/user/register', { name, username, password, role,email, phone});
         // Handle successful registration, e.g., redirect to login page
         console.log(response.data);
         Swal.fire({
@@ -82,9 +82,9 @@ const RegisterPage = () => {
       {validationError && name.length<=0?<label className='text-red-500'>*Name filed can't be empty</label>:''}
 
       <div className="flex items-center border-b border-gray-200 py-2">
-        <i className="fas fa-at text-gray-400 mr-2"></i>  <input type="email" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Email Address" className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
+        <i className="fas fa-at text-gray-400 mr-2"></i>  <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
       </div>
-      {validationError && username.length<=0?<label className='text-red-500'>*Email filed can't be empty</label>:''}
+      {validationError && username.length<=0?<label className='text-red-500'>*<Username></Username> filed can't be empty</label>:''}
 
       <div className="flex items-center border-b border-gray-200 py-2">
         <i className="fas fa-lock text-gray-400 mr-2"></i>  <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50" />
@@ -103,7 +103,7 @@ const RegisterPage = () => {
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="Phone Number"
+            placeholder="+123456789"
             className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
           />
         </div>

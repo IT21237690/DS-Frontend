@@ -13,7 +13,7 @@ const AllCoursesPage = () => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await axios.get('http://localhost:5002/api/course/allCourses');
+                const response = await axios.get('http://localhost:9080/api/course/allCourses');
                 // Filter the courses to display only approved ones
                 const approvedCourses = response.data.filter(course => course.isApproved);
                 setCourses(approvedCourses);
@@ -42,7 +42,7 @@ const AllCoursesPage = () => {
           const sid = decodedToken.sid;
   
           // Call the download route on the server
-          const response = await axios.get(`http://localhost:5002/api/course/download/${sid}/${courseCode}`, {
+          const response = await axios.get(`http://localhost:9080/api/course/download/${sid}/${courseCode}`, {
               responseType: 'blob', // Set responseType to 'blob' for binary data
           });
   

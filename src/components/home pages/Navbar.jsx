@@ -39,7 +39,7 @@ const Navbar = () => {
   return (
     <nav>
       <div className="nav-text-container">
-      <span className="nav-text" style={{ color: "#03b3ef", fontSize: "40px", fontWeight: "bold" }}>Wishwa</span>
+      <span className="nav-text" style={{ color: "#03b3ef", fontSize: "40px", fontWeight: "bold" }}>COURSE GEEK</span>
       </div>
       <div className="navbar-links-container">
         <a href="/">Home</a>

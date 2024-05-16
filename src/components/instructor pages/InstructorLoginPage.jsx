@@ -18,7 +18,7 @@ const InsLoginPage = () => {
       setValidationError(true);
     } else{
     try {
-      const response = await axios.post('http://localhost:5000/api/user/login', {
+      const response = await axios.post('http://localhost:9080/api/user/login', {
         username: username,
         password: password
       }, {
@@ -58,7 +58,7 @@ const InsLoginPage = () => {
 
       <div className="w-full md:w-1/2 mx-auto p-8 m-4 space-y-4 bg-white rounded-xl drop-shadow-2xl backdrop-blur-md">
 
-        <h2 className="text-2xl font-semibold text-center text-gray-800">Welcome Back!</h2>
+        <h2 className="text-2xl font-semibold text-center text-gray-800">Instructor Login</h2>
 
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
@@ -79,7 +79,7 @@ const InsLoginPage = () => {
           <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Login</button>
 
         </form>
-        <a href="#" className="text-sm text-center text-gray-600 hover:text-blue-500">Forgot Password?</a>
+        <a href="/login" className="text-sm text-center text-red-600 hover:text-blue-500" style={{ display: 'block', margin: 'auto', marginTop: '10px' }}>Student Login</a>
         <button type="button" onClick={handleRegister} className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Register</button>
       </div>
     </div>
