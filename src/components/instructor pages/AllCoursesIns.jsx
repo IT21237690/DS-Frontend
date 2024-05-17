@@ -36,11 +36,18 @@ const AllCoursesInsPage = () => {
         navigate('/Insdetails'); 
     }
 
+    const handleAdd = () => {
+        navigate('/course/add'); 
+    }
+
     return (
         <div className="relative">
             <div>
             <button onClick={handleHome} className="absolute top-4 left-4 bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-500 transition duration-300">
           BACK
+        </button>
+        <button onClick={handleAdd} className="absolute top-4 right-4 bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-500 transition duration-300">
+          ADD COURSE
         </button>
         <h1 className="text-3xl font-bold text-gray-800 mt-8 mb-4 text-center">Added Courses</h1>
             <div className="overflow-x-auto container m-8 bg-gray-300 rounded-2xl" style={{ width: '100%', height: '80vh' }}>

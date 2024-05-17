@@ -61,8 +61,8 @@ const AddCourse = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <h2 className="text-xl font-semibold mb-4">Add Course</h2>
+    <div className="w-full mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gradient-to-r from-white to-cyan-800">
+      <h2 className="text-2xl font-semibold mb-4 "><center>Add Course</center></h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="code" className="block">Code:</label>
